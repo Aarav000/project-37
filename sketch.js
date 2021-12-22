@@ -1,37 +1,30 @@
-var canvas;
-var backgroundImage, bgImg, car1_img, car2_img, track;
-var database, gameState;
-var form, player, playerCount;
-var allPlayers, car1, car2;
-var cars = [];
+var canvas, backgroundImage;
 
-function preload() {
-  backgroundImage = loadImage("./assets/background.png");
-  car1_img = loadImage("../assets/car1.png");
-  car2_img = loadImage("../assets/car2.png");
-  track = loadImage("../assets/track.jpg");
-}
+var gameState = 0;
+var contestantCount;
+var allContestants;
+var answer;
+var database;
 
-function setup() {
-  canvas = createCanvas(windowWidth, windowHeight);
+var question, contestant, quiz;
+
+
+function setup(){
+  canvas = createCanvas(850,400);
   database = firebase.database();
-  game = new Game();
-  game.getState();
-  game.start();
+  quiz = new Quiz();
+  quiz.getState();
+  quiz.start();
 }
 
-function draw() {
-  background(backgroundImage);
-  if (playerCount === 2) {
-    game.update(1);
 
+function draw(){
+  background("pink");
+  if(contestantCount === 2){
+    quiz.update(1);
   }
-
-  if (gameState === 1) {
-    game.play();
+  if(gameState === 1){
+    clear();
+    quiz.play();
   }
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
 }
